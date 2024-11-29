@@ -9,7 +9,8 @@ import {Olympic} from "../../core/models/Olympic";
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  public olympics$: Observable<Olympic[] | null> = of(null);
+  public olympics$: Observable<Olympic[] | null> = of();
+  pageTitle: string = "Medals per Country";
 
   constructor(private olympicService: OlympicService) {}
 
