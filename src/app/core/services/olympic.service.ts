@@ -1,6 +1,6 @@
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, map, Observable} from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import {Olympic} from "../models/Olympic";
 
@@ -9,7 +9,7 @@ import {Olympic} from "../models/Olympic";
 })
 export class OlympicService {
   private olympicUrl: string = './assets/mock/olympic.json';
-  private olympics$: BehaviorSubject<Olympic[] | null> = new BehaviorSubject<Olympic[] | null>(null);
+  private olympics$: BehaviorSubject<Olympic[]> = new BehaviorSubject<Olympic[]>([]);
 
   constructor(private http: HttpClient) {}
 
@@ -20,13 +20,26 @@ export class OlympicService {
         // TODO: improve error handling
         console.error("Error loading data: ", error.message);
         // can be useful to end loading state and let the user know something went wrong
-        this.olympics$.next(null);
+        this.olympics$.next([]);
         return caught;
       })
     );
   }
 
-  getOlympics(): Observable<Olympic[] | null> {
+  getOlympics(): Observable<Olympic[]> {
     return this.olympics$.asObservable();
+  }
+
+  getNumberOfJOs(): Observable<number> {
+    return this.getOlympics().pipe(
+      map((olympics) => {
+        const uniqueCities: Set<string> = new Set<string>(
+          olympics.flatMap(country =>
+            country.participations.map((participation) => participation.city)
+          )
+        );
+        return uniqueCities.size;
+      })
+    );
   }
 }
