@@ -1,4 +1,8 @@
-app-title {
+app-title, .stats-cards-container {
   display: flex;
   justify-content: center;
+}
+
+.stats-cards-container {
+  column-gap: 3%;
 }

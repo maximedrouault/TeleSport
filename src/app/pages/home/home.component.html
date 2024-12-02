@@ -1,5 +1,7 @@
 <app-title [pageTitle]="pageTitle" />
 
-@for (statCardInfo of statsCardInfos; track $index) {
-  <app-stats-card [statsCardInfos]="statCardInfo" />
-}
+<div class="stats-cards-container">
+  @for (statCardInfo of statsCardInfos; track $index) {
+    <app-stats-card [statsCardInfos]="statCardInfo" />
+  }
+</div>

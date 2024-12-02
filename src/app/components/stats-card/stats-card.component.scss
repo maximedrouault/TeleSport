@@ -1,0 +1,16 @@
+.stats-card-container {
+  width: fit-content;
+  text-align: center;
+  padding: 0 1em 0 1em;
+  border: solid 2px var(--primary-color);
+  border-radius: 0.7em;
+}
+
+.stats-card-value {
+  font-weight: bold;
+}
+
+.stats-card-title, .stats-card-value {
+  margin: 0.5em 0 0.5em 0;
+  font-size: clamp(0.7em, 6vw, 1.2em);
+}
