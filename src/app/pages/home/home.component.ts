@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 
 @Component({
@@ -15,7 +15,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.statsCardInfos = [
-      { title: "Number of JOs", value$: this.olympicService.getNumberOfJOs() }
+      { title: "Number of JOs", value$: this.olympicService.getNumberOfJOs() },
+      { title: "Number of countries", value$: this.olympicService.getNumberOfCountries()}
     ]
   }
 }

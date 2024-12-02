@@ -42,4 +42,10 @@ export class OlympicService {
       })
     );
   }
+
+  getNumberOfCountries(): Observable<number> {
+    return this.getOlympics().pipe(
+      map((olympics) => olympics.length)
+    );
+  }
 }
