@@ -1,1 +1,5 @@
-<app-title [title]="pageTitle" />
+<app-title [pageTitle]="pageTitle" />
+
+@for (statCardInfo of statsCardInfos; track $index) {
+  <app-stats-card [statsCardInfos]="statCardInfo" />
+}

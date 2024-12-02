@@ -10,7 +10,11 @@ import {Olympic} from "../../core/models/Olympic";
 })
 export class HomeComponent implements OnInit {
   public olympics$: Observable<Olympic[] | null> = of();
-  pageTitle: string = "Medals per Country";
+  pageTitle = "Medals per Country";
+  statsCardInfos = [
+    { title: "Number of JOs", value: 10 },
+    { title: "Number of Countries", value: 20 }
+  ]
 
   constructor(private olympicService: OlympicService) {}
 
