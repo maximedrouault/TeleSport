@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
 
     this.chartOptions = {
       responsive: true,
-      aspectRatio: 3,
+      maintainAspectRatio: false,
       plugins: {
         legend: {
           display: false

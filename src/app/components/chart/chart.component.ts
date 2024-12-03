@@ -1,6 +1,5 @@
 import {Component, Input} from '@angular/core';
 import {ChartModule} from "primeng/chart";
-import {AsyncPipe} from "@angular/common";
 import {Observable, of} from "rxjs";
 import {ChartConfiguration} from "chart.js";
 
@@ -8,8 +7,7 @@ import {ChartConfiguration} from "chart.js";
   selector: 'app-chart',
   standalone: true,
   imports: [
-    ChartModule,
-    AsyncPipe
+    ChartModule
   ],
   templateUrl: './chart.component.html',
   styleUrl: './chart.component.scss'
