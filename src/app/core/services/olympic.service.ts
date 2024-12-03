@@ -48,4 +48,19 @@ export class OlympicService {
       map((olympics) => olympics.length)
     );
   }
+
+  getTotalMedalsByCountry(): Observable<{ country: string, totalMedals: number }[]> {
+    return this.getOlympics().pipe(
+      map((olympics) => {
+        const totalMedalsByCountry: { country: string, totalMedals: number }[] =
+          olympics.map((country) => ({
+            country: country.country,
+            totalMedals: country.participations.reduce(
+              (sum, participation) => sum + participation.medalsCount, 0
+            )
+          }));
+        return totalMedalsByCountry;
+      })
+    );
+  }
 }

@@ -7,10 +7,12 @@ import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import {TitleComponent} from "./components/title/title.component";
 import {StatsCardComponent} from "./components/stats-card/stats-card.component";
+import {ChartComponent} from "./components/chart/chart.component";
+import {ChartModule} from "primeng/chart";
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, NotFoundComponent],
-    imports: [BrowserModule, AppRoutingModule, HttpClientModule, TitleComponent, StatsCardComponent],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, TitleComponent, StatsCardComponent, ChartComponent, ChartModule],
   providers: [],
   bootstrap: [AppComponent],
 })
