@@ -33,7 +33,25 @@ export class PieChartComponent implements OnInit {
         }
       },
       borderWidth: 0,
+
       plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          backgroundColor: "rgba(4, 130, 142, 1)",
+          titleFont: {
+            family: "Montserrat",
+            size: 16,
+            weight: "normal"
+          },
+          bodyFont: {
+            family: "Montserrat",
+            size: 14
+          },
+          bodyAlign: "center",
+          displayColors: false,
+        },
         outlabels: {
           color: 'black',
           backgroundColor: null,
@@ -43,11 +61,8 @@ export class PieChartComponent implements OnInit {
             minSize: 12,
             maxSize: 20
           }
-        },
-        legend: {
-          display: false
         }
-      }
+      },
     };
   }
 }
