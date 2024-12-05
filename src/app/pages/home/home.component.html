@@ -1,4 +1,4 @@
-<app-title [pageTitle]="pageTitle" />
+<app-title class="page-title" [pageTitle]="pageTitle" />
 
 <div class="stats-cards-container">
   @for (statCardInfo of statsCardInfos; track $index) {
@@ -9,6 +9,6 @@
   }
 </div>
 
-<div class="home-chart-container">
-  <app-chart [chartType]="chartType" [chartData$]="chartData$ | async" [chartOptions]="chartOptions" />
+<div class="pie-chart-container">
+  <app-chart [chartData$]="chartData$ | async" />
 </div>

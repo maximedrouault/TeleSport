@@ -1,0 +1,5 @@
+@if (chartData$ && chartOptions) {
+  <p-chart [type]="chartType" [data]="chartData$" [options]="chartOptions" [height]="chartOptions.height" [width]="chartOptions.width" />
+} @else {
+  <p class="pie-chart-placeholder">No data or options available to display the chart.</p>
+}

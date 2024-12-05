@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {map, Observable, of} from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
-import {ChartConfiguration} from "chart.js";
 
 @Component({
   selector: 'app-home',
@@ -14,14 +13,10 @@ export class HomeComponent implements OnInit {
     { title: "", value$: of(null) }
   ];
   chartData$: Observable<any> = of();
-  chartOptions: ChartConfiguration["options"];
-  chartType: "bar" | "line" | "scatter" | "bubble" | "pie" | "doughnut" | "polarArea" | "radar" | undefined = "pie";
 
   constructor(private olympicService: OlympicService) {}
 
   ngOnInit(): void {
-    console.log(this.statsCardInfos)
-
     this.statsCardInfos = [
       { title: "Number of JOs", value$: this.olympicService.getNumberOfJOs() },
       { title: "Number of countries", value$: this.olympicService.getNumberOfCountries()}
@@ -37,15 +32,5 @@ export class HomeComponent implements OnInit {
         ]
       }))
     )
-
-    this.chartOptions = {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: false
-        }
-      }
-    }
   }
 }

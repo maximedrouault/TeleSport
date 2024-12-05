@@ -1,4 +1,4 @@
-app-title, .stats-cards-container {
+.page-title, .stats-cards-container {
   display: flex;
   justify-content: center;
 }
@@ -7,6 +7,6 @@ app-title, .stats-cards-container {
   column-gap: 3%;
 }
 
-.home-chart-container {
-  margin-top: 50px;
+.pie-chart-container {
+  height: min(max(200px, 50vh), 50vw);
 }
