@@ -24,6 +24,7 @@ export class PieChartComponent implements OnInit {
     this.chartOptions = {
       with: "100%",
       height: "100%",
+      borderWidth: 0,
       layout: {
         padding: {
           left: 0,
@@ -32,7 +33,6 @@ export class PieChartComponent implements OnInit {
           bottom: 30
         }
       },
-      borderWidth: 0,
 
       plugins: {
         legend: {
@@ -51,6 +51,14 @@ export class PieChartComponent implements OnInit {
           },
           bodyAlign: "center",
           displayColors: false,
+          yAlign: "bottom",
+          caretSize: 15,
+          padding: {
+            top: 5,
+            bottom: 5,
+            left: 10,
+            right: 10
+          }
         },
         outlabels: {
           color: 'black',
