@@ -84,4 +84,16 @@ export class OlympicService {
       })
     );
   }
+
+  getTotalAthletesByCountry(countryId?: number | null): Observable<number | null> {
+    return this.getOlympics().pipe(
+      map((olympics: Olympic[]): number | null => {
+        const countryFound: Olympic | undefined = olympics.find((country: Olympic): boolean => country.id === countryId);
+
+        return countryFound ? countryFound.participations.reduce(
+          (sum: number, participation: Participation): number => sum + participation.athleteCount, 0
+        ) : null;
+      })
+    );
+  }
 }
