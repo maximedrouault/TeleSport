@@ -33,12 +33,12 @@ export class OlympicService {
   getNumberOfJOs(): Observable<number> {
     return this.getOlympics().pipe(
       map((olympics) => {
-        const uniqueCities: Set<string> = new Set<string>(
-          olympics.flatMap(country =>
-            country.participations.map((participation) => participation.city)
+        const uniqueYear: Set<number> = new Set<number>(
+          olympics.flatMap(year =>
+            year.participations.map((participation) => participation.year)
           )
         );
-        return uniqueCities.size;
+        return uniqueYear.size;
       })
     );
   }
