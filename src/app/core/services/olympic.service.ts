@@ -1,8 +1,9 @@
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject, map, Observable} from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import {catchError, tap} from 'rxjs/operators';
 import {Olympic} from "../models/Olympic";
+import {Participation} from "../models/Participation";
 
 @Injectable({
   providedIn: 'root',
@@ -32,10 +33,10 @@ export class OlympicService {
 
   getNumberOfJOs(): Observable<number> {
     return this.getOlympics().pipe(
-      map((olympics) => {
+      map((olympics: Olympic[]): number => {
         const uniqueYear: Set<number> = new Set<number>(
-          olympics.flatMap(year =>
-            year.participations.map((participation) => participation.year)
+          olympics.flatMap((year: Olympic): number[] =>
+            year.participations.map((participation: Participation): number => participation.year)
           )
         );
         return uniqueYear.size;
@@ -45,29 +46,27 @@ export class OlympicService {
 
   getNumberOfCountries(): Observable<number> {
     return this.getOlympics().pipe(
-      map((olympics) => olympics.length)
+      map((olympics: Olympic[]): number => olympics.length)
     );
   }
 
   getTotalMedalsByCountries(): Observable<{ country: string, totalMedals: number }[]> {
     return this.getOlympics().pipe(
-      map((olympics) => {
-        const totalMedalsByCountry: { country: string, totalMedals: number }[] =
-          olympics.map((country) => ({
-            country: country.country,
-            totalMedals: country.participations.reduce(
-              (sum, participation) => sum + participation.medalsCount, 0
-            )
-          }));
-        return totalMedalsByCountry;
+      map((olympics: Olympic[]): { country: string, totalMedals: number }[] => {
+        return olympics.map((country: Olympic): { country: string, totalMedals: number } => ({
+          country: country.country,
+          totalMedals: country.participations.reduce(
+            (sum: number, participation: Participation): number => sum + participation.medalsCount, 0
+          )
+        }));
       })
     );
   }
 
-  getNumberOfParticipations(countryId?: number | null): Observable<number | null> {
+  getNumberOfParticipationsByCountry(countryId?: number | null): Observable<number | null> {
     return this.getOlympics().pipe(
-      map((olympics) => {
-        const countryFound = olympics.find((country) => country.id === countryId);
+      map((olympics: Olympic[]): number | null => {
+        const countryFound: Olympic | undefined = olympics.find((country: Olympic): boolean => country.id === countryId);
 
         return countryFound ? countryFound.participations.length : null;
       })

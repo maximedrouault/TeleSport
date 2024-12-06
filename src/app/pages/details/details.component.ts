@@ -24,9 +24,9 @@ export class DetailsComponent implements OnInit{
 
   constructor(private olympicService: OlympicService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.statsCardInfos = [
-      { title: "Number of entries", value$: this.olympicService.getNumberOfParticipations() },
+      { title: "Number of entries", value$: this.olympicService.getNumberOfParticipationsByCountry(1) },
       { title: "Total number medals", value$: of()},
       { title: "Total number of athletes", value$: of()}
     ]

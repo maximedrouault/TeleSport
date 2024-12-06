@@ -20,7 +20,7 @@ export class PieChartComponent implements OnInit {
   chartType: "bar" | "line" | "scatter" | "bubble" | "pie" | "doughnut" | "polarArea" | "radar" | undefined = "pie";
   chartOptions: any;
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.chartOptions = {
       with: "100%",
       height: "100%",
