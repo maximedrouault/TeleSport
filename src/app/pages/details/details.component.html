@@ -1,1 +1,10 @@
 <app-title class="page-title" [pageTitle]="pageTitle"/>
+
+<div class="stats-cards-container">
+  @for (statCardInfo of statsCardInfos; track $index) {
+    <app-stats-card [statsCardInfos]="{
+      title: statCardInfo.title,
+      value: (statCardInfo.value$ | async)
+    }" />
+  }
+</div>
