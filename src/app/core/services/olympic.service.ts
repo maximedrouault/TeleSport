@@ -49,7 +49,7 @@ export class OlympicService {
     );
   }
 
-  getTotalMedalsByCountry(): Observable<{ country: string, totalMedals: number }[]> {
+  getTotalMedalsByCountries(): Observable<{ country: string, totalMedals: number }[]> {
     return this.getOlympics().pipe(
       map((olympics) => {
         const totalMedalsByCountry: { country: string, totalMedals: number }[] =
@@ -60,6 +60,16 @@ export class OlympicService {
             )
           }));
         return totalMedalsByCountry;
+      })
+    );
+  }
+
+  getNumberOfParticipations(countryId?: number | null): Observable<number | null> {
+    return this.getOlympics().pipe(
+      map((olympics) => {
+        const countryFound = olympics.find((country) => country.id === countryId);
+
+        return countryFound ? countryFound.participations.length : null;
       })
     );
   }

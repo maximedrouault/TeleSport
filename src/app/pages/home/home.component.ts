@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
       { title: "Number of countries", value$: this.olympicService.getNumberOfCountries()}
     ]
 
-    this.chartData$ = this.olympicService.getTotalMedalsByCountry().pipe(
+    this.chartData$ = this.olympicService.getTotalMedalsByCountries().pipe(
       map((data) => ({
         labels: data.map((entry) => entry.country),
         datasets: [
