@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {map, Observable, of} from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ export class HomeComponent implements OnInit {
   ];
   chartData$: Observable<any> = of();
 
-  constructor(private olympicService: OlympicService) {}
+  constructor(private olympicService: OlympicService, private router: Router) {}
 
   ngOnInit(): void {
     this.statsCardInfos = [
@@ -32,5 +33,16 @@ export class HomeComponent implements OnInit {
         ]
       }))
     )
+  }
+
+  handleSegmentClicked(segmentId: number): void {
+    const clickedCountryId: number = segmentId + 1;
+
+    this.router.navigateByUrl(`details/${clickedCountryId}`)
+      .catch((error: any): void => {
+        console.error(error.message);
+        this.router.navigateByUrl("/404")
+          .catch((error: any): void => console.error(error.message));
+      });
   }
 }

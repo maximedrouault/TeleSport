@@ -1,5 +1,11 @@
 @if (chartData$ && chartOptions) {
-  <p-chart [type]="chartType" [data]="chartData$" [options]="chartOptions" [height]="chartOptions.height" [width]="chartOptions.width" />
+  <p-chart [type]="chartType"
+           [data]="chartData$"
+           [options]="chartOptions"
+           [height]="chartOptions.height"
+           [width]="chartOptions.width"
+           (onDataSelect)="onChartClick($event)"
+  />
 } @else {
   <p class="pie-chart-placeholder">No data or options available to display the chart.</p>
 }

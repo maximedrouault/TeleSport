@@ -4,6 +4,7 @@ import {Observable, of} from "rxjs";
 import {AsyncPipe} from "@angular/common";
 import {StatsCardComponent} from "../../components/stats-card/stats-card.component";
 import {OlympicService} from "../../core/services/olympic.service";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-details',
@@ -11,7 +12,8 @@ import {OlympicService} from "../../core/services/olympic.service";
   imports: [
     TitleComponent,
     AsyncPipe,
-    StatsCardComponent
+    StatsCardComponent,
+    RouterLink
   ],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss'
@@ -21,14 +23,17 @@ export class DetailsComponent implements OnInit{
   statsCardInfos: { title: string, value$: Observable<number | null> }[] = [
     { title: "", value$: of(null) }
   ];
+  countryId: number | null = null;
 
-  constructor(private olympicService: OlympicService) {}
+  constructor(private olympicService: OlympicService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.countryId = Number(this.route.snapshot.params["id"]);
+
     this.statsCardInfos = [
-      { title: "Number of entries", value$: this.olympicService.getNumberOfParticipationsByCountry(1) },
-      { title: "Total number medals", value$: this.olympicService.getTotalMedalsByCountry(1) },
-      { title: "Total number of athletes", value$: this.olympicService.getTotalAthletesByCountry(1) }
+      { title: "Number of entries", value$: this.olympicService.getNumberOfParticipationsByCountry(this.countryId) },
+      { title: "Total number medals", value$: this.olympicService.getTotalMedalsByCountry(this.countryId) },
+      { title: "Total number of athletes", value$: this.olympicService.getTotalAthletesByCountry(this.countryId) }
     ]
   }
 }

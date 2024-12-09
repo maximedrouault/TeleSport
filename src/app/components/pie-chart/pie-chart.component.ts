@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ChartModule} from "primeng/chart";
 import {Observable, of} from "rxjs";
 import {Chart, ChartData} from "chart.js";
@@ -19,6 +19,7 @@ export class PieChartComponent implements OnInit {
   @Input() chartData$ : Observable<ChartData> = of();
   chartType: "bar" | "line" | "scatter" | "bubble" | "pie" | "doughnut" | "polarArea" | "radar" | undefined = "pie";
   chartOptions: any;
+  @Output() segmentClicked: EventEmitter<number> = new EventEmitter<number>();
 
   ngOnInit(): void {
     this.chartOptions = {
@@ -70,7 +71,15 @@ export class PieChartComponent implements OnInit {
             maxSize: 20
           }
         }
-      },
+      }
     };
+  }
+
+  onChartClick(event: any): void {
+    if (event.element) {
+      const clickedSegment: number = event.element.index;
+
+      this.segmentClicked.emit(clickedSegment);
+    }
   }
 }
