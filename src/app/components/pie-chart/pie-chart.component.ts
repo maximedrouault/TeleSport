@@ -53,18 +53,13 @@ export class PieChartComponent implements OnInit {
           bodyAlign: "center",
           displayColors: false,
           yAlign: "bottom",
-          caretSize: 15,
-          padding: {
-            top: 5,
-            bottom: 5,
-            left: 10,
-            right: 10
-          }
+          caretSize: 15
         },
         outlabels: {
-          color: 'black',
+          color: "black",
           backgroundColor: null,
           lineWidth: 1,
+          stretch: 1,
           font: {
             family: "Montserrat",
             minSize: 12,

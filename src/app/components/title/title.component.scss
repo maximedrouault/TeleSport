@@ -1,9 +1,13 @@
-h1 {
+.title-component-title {
   width: fit-content;
   padding: 0.2em 0.5em 0.2em 0.5em;
   text-align: center;
   color: white;
   background-color: var(--primary-color);
   border-radius: 0.3em;
-  font-size: clamp(1.2em, 9vw, 2em);
+  font-size: clamp(1.8em, 2.2vw, 2.2em);
+
+  @media screen and (orientation: landscape){
+    font-size: clamp(1.5em, 2.2vw, 2.2em);
+  }
 }
