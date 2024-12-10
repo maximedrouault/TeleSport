@@ -7,7 +7,7 @@ import Outlabels from '@energiency/chartjs-plugin-piechart-outlabels';
 Chart.register(Outlabels);
 
 @Component({
-  selector: 'app-chart',
+  selector: 'app-pie-chart',
   standalone: true,
   imports: [
     ChartModule

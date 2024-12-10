@@ -96,4 +96,17 @@ export class OlympicService {
       })
     );
   }
+
+  getMedalsByCountryParticipations(countryId: number | null): Observable<{ year: number, medalsCount: number }[] | null> {
+    return this.getOlympics().pipe(
+      map((olympics: Olympic[]): { year: number, medalsCount: number }[] | null => {
+        const countryFound: Olympic | undefined = olympics.find((country: Olympic): boolean => country.id === countryId);
+
+        return countryFound ? countryFound.participations.map((participation: Participation): { year: number, medalsCount: number } => ({
+          year: participation.year,
+          medalsCount: participation.medalsCount
+        })) : null;
+      })
+    );
+  }
 }

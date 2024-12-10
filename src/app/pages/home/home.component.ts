@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
         labels: data.map((entry: { country: string, totalMedals: number }): string => entry.country),
         datasets: [
           {
-            data: data.map((entry: { country: string, totalMedals:number }): number => entry.totalMedals)
+            data: data.map((entry: { country: string, totalMedals: number }): number => entry.totalMedals)
           }
         ]
       }))

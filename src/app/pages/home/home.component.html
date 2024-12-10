@@ -10,7 +10,7 @@
 </div>
 
 <div class="pie-chart-container">
-  <app-chart
+  <app-pie-chart
     [chartData$]="chartData$ | async"
     (segmentClicked)="handleSegmentClicked($event)"
   />
