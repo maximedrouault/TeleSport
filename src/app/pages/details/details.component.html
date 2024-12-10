@@ -1,16 +1,18 @@
-<app-title class="page-title" [pageTitle]="pageTitle"/>
+<div class="details-page-container">
+  <app-title class="page-title" [pageTitle]="pageTitle"/>
 
-<div class="stats-cards-container">
-  @for (statCardInfo of statsCardInfos; track $index) {
-    <app-stats-card [statsCardInfos]="{
+  <div class="stats-cards-container">
+    @for (statCardInfo of statsCardInfos; track $index) {
+      <app-stats-card [statsCardInfos]="{
       title: statCardInfo.title,
       value: (statCardInfo.value$ | async)
     }" />
-  }
-</div>
+    }
+  </div>
 
-<div class="line-chart-container">
-  <app-line-chart [chartData$]="chartData$ | async" />
-</div>
+  <div class="line-chart-container">
+    <app-line-chart [chartData$]="chartData$ | async" />
+  </div>
 
-<a routerLink="" class="back-link">Go back</a>
+  <a routerLink="" class="back-link">Go back</a>
+</div>
