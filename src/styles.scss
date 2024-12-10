@@ -14,3 +14,17 @@ h1, h2 {
   font-weight: normal;
   margin: 0;
 }
+
+.back-link {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  font-size: clamp(1em, 1.3vw, 1.3em);
+  padding: 6px;
+  border-radius: 10px;
+  background-color: lightblue;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: lightskyblue;
+  }
+}
