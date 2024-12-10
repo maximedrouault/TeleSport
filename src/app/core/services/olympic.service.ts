@@ -102,7 +102,9 @@ export class OlympicService {
       map((olympics: Olympic[]): { year: number, medalsCount: number }[] | null => {
         const countryFound: Olympic | undefined = olympics.find((country: Olympic): boolean => country.id === countryId);
 
-        return countryFound ? countryFound.participations.map((participation: Participation): { year: number, medalsCount: number } => ({
+        return countryFound ? countryFound.participations
+          .sort((a: Participation, b: Participation): number => a.year - b.year)
+          .map((participation: Participation): { year: number, medalsCount: number } => ({
           year: participation.year,
           medalsCount: participation.medalsCount
         })) : null;
