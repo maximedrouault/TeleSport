@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   ];
   chartData$: Observable<any> = of();
 
-  constructor(private olympicService: OlympicService, private router: Router) {}
+  constructor(private readonly olympicService: OlympicService, private readonly router: Router) {}
 
   ngOnInit(): void {
     this.statsCardInfos = [

@@ -9,10 +9,10 @@ import {Participation} from "../models/Participation";
   providedIn: 'root',
 })
 export class OlympicService {
-  private olympicUrl: string = './assets/mock/olympic.json';
-  private olympics$: BehaviorSubject<Olympic[]> = new BehaviorSubject<Olympic[]>([]);
+  private readonly olympicUrl: string = './assets/mock/olympic.json';
+  private readonly olympics$: BehaviorSubject<Olympic[]> = new BehaviorSubject<Olympic[]>([]);
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   loadInitialData(): Observable<Olympic[]> {
     return this.http.get<Olympic[]>(this.olympicUrl).pipe(
@@ -102,12 +102,12 @@ export class OlympicService {
       map((olympics: Olympic[]): { year: number, medalsCount: number }[] | null => {
         const countryFound: Olympic | undefined = olympics.find((country: Olympic): boolean => country.id === countryId);
 
-        return countryFound ? countryFound.participations
+        return countryFound ? [...countryFound.participations]
           .sort((a: Participation, b: Participation): number => a.year - b.year)
           .map((participation: Participation): { year: number, medalsCount: number } => ({
-          year: participation.year,
-          medalsCount: participation.medalsCount
-        })) : null;
+            year: participation.year,
+            medalsCount: participation.medalsCount
+          })) : null;
       })
     );
   }

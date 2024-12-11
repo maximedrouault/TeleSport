@@ -28,7 +28,7 @@ export class DetailsComponent implements OnInit{
   countryId: number | null = null;
   chartData$: Observable<any> = of();
 
-  constructor(private olympicService: OlympicService, private route: ActivatedRoute) {}
+  constructor(private readonly olympicService: OlympicService, private readonly route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.countryId = Number(this.route.snapshot.params["id"]);

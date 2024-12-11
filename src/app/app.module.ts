@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import {provideHttpClient} from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -12,8 +12,8 @@ import {ChartModule} from "primeng/chart";
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, NotFoundComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, TitleComponent, StatsCardComponent, PieChartComponent, ChartModule],
-  providers: [],
+  imports: [BrowserModule, AppRoutingModule, TitleComponent, StatsCardComponent, PieChartComponent, ChartModule],
+  providers: [provideHttpClient()],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
