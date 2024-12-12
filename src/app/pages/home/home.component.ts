@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {map, Observable, of} from 'rxjs';
+import {interval, map, Observable, of, take} from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import {Router} from "@angular/router";
 import {Olympic} from "../../core/models/Olympic";
@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
       }))
     )
 
-    this.chartData$.subscribe((olympics: Olympic[]): void => {
+    this.chartData$.pipe(take(1)).subscribe((olympics: Olympic[]): void => {
       if (!this.statsCardInfos || !olympics) {
         this.router.navigateByUrl("/404")
           .catch((error: any): void => console.error(error.message));

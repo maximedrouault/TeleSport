@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {TitleComponent} from "../../components/title/title.component";
-import {map, Observable, of} from "rxjs";
+import {map, Observable, of, take} from "rxjs";
 import {AsyncPipe} from "@angular/common";
 import {StatsCardComponent} from "../../components/stats-card/stats-card.component";
 import {OlympicService} from "../../core/services/olympic.service";
@@ -52,7 +52,7 @@ export class DetailsComponent implements OnInit{
       )
     );
 
-    this.chartData$.subscribe((olympics: { year: number, medalsCount: number }[] | null): void => {
+    this.chartData$.pipe(take(1)).subscribe((olympics: { year: number, medalsCount: number }[] | null): void => {
       if (!(this.statsCardInfos && olympics && olympics.length > 0)) {
         setTimeout((): void => this.checkDataAndRedirect(), 1000);
       }
@@ -60,7 +60,7 @@ export class DetailsComponent implements OnInit{
   }
 
   private checkDataAndRedirect(): void {
-    this.chartData$.subscribe((updatedOlympics: { year: number, medalsCount: number }[] | null): void => {
+    this.chartData$.pipe(take(1)).subscribe((updatedOlympics: { year: number, medalsCount: number }[] | null): void => {
       if (!this.statsCardInfos || !updatedOlympics || updatedOlympics.length === 0) {
         this.router.navigateByUrl("/404").catch((error: any): void => console.error(error.message));
       }
