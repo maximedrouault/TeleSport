@@ -53,7 +53,7 @@ export class DetailsComponent implements OnInit{
     );
 
     this.chartData$.pipe(take(1)).subscribe((olympics: { year: number, medalsCount: number }[] | null): void => {
-      if (!(this.statsCardInfos && olympics && olympics.length > 0)) {
+      if (!(this.statsCardInfos && olympics)) {
         setTimeout((): void => this.checkDataAndRedirect(), 1000);
       }
     });
