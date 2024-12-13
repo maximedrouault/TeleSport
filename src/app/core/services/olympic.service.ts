@@ -14,6 +14,10 @@ export class OlympicService {
 
   constructor(private readonly http: HttpClient) {}
 
+  /**
+   * Loads the initial data from the provided URL.
+   * @returns {Observable<Olympic[]>} An observable containing the list of Olympic events.
+   */
   loadInitialData(): Observable<Olympic[]> {
     return this.http.get<Olympic[]>(this.olympicUrl).pipe(
       tap((value: Olympic[]): void => this.olympics$.next(value)),
@@ -26,10 +30,18 @@ export class OlympicService {
     );
   }
 
+  /**
+   * Gets the observable of Olympic events.
+   * @returns {Observable<Olympic[]>} An observable containing the list of Olympic events.
+   */
   getOlympics(): Observable<Olympic[]> {
     return this.olympics$.asObservable();
   }
 
+  /**
+   * Gets the number of unique Olympic years.
+   * @returns {Observable<number>} An observable containing the number of unique Olympic years.
+   */
   getNumberOfJOs(): Observable<number> {
     return this.getOlympics().pipe(
       map((olympics: Olympic[]): number => {
@@ -43,12 +55,20 @@ export class OlympicService {
     );
   }
 
+  /**
+   * Gets the number of countries that participated in the Olympics.
+   * @returns {Observable<number>} An observable containing the number of countries.
+   */
   getNumberOfCountries(): Observable<number> {
     return this.getOlympics().pipe(
       map((olympics: Olympic[]): number => olympics.length)
     );
   }
 
+  /**
+   * Gets the total number of medals won by each country.
+   * @returns {Observable<{ country: string, totalMedals: number }[]>} An observable containing the total medals by country.
+   */
   getTotalMedalsByCountries(): Observable<{ country: string, totalMedals: number }[]> {
     return this.getOlympics().pipe(
       map((olympics: Olympic[]): { country: string, totalMedals: number }[] => {
@@ -62,6 +82,11 @@ export class OlympicService {
     );
   }
 
+  /**
+   * Gets the number of participations by a specific country.
+   * @param {number | null} countryId - The ID of the country.
+   * @returns {Observable<number | null>} An observable containing the number of participations or null if not found.
+   */
   getNumberOfParticipationsByCountry(countryId?: number | null): Observable<number | null> {
     return this.getOlympics().pipe(
       map((olympics: Olympic[]): number | null => {
@@ -72,6 +97,11 @@ export class OlympicService {
     );
   }
 
+  /**
+   * Gets the total number of medals won by a specific country.
+   * @param {number | null} countryId - The ID of the country.
+   * @returns {Observable<number | null>} An observable containing the total medals or null if not found.
+   */
   getTotalMedalsByCountry(countryId?: number | null): Observable<number | null> {
     return this.getOlympics().pipe(
       map((olympics: Olympic[]): number | null => {
@@ -84,6 +114,11 @@ export class OlympicService {
     );
   }
 
+  /**
+   * Gets the total number of athletes by a specific country.
+   * @param {number | null} countryId - The ID of the country.
+   * @returns {Observable<number | null>} An observable containing the total athletes or null if not found.
+   */
   getTotalAthletesByCountry(countryId?: number | null): Observable<number | null> {
     return this.getOlympics().pipe(
       map((olympics: Olympic[]): number | null => {
@@ -96,6 +131,11 @@ export class OlympicService {
     );
   }
 
+  /**
+   * Gets the medals won by a specific country in each participation.
+   * @param {number | null} countryId - The ID of the country.
+   * @returns {Observable<{ year: number, medalsCount: number }[] | null>} An observable containing the medals by year or null if not found.
+   */
   getMedalsByCountryParticipations(countryId: number | null): Observable<{ year: number, medalsCount: number }[] | null> {
     return this.getOlympics().pipe(
       map((olympics: Olympic[]): { year: number, medalsCount: number }[] | null => {
