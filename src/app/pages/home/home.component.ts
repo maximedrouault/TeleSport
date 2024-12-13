@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {interval, map, Observable, of, take} from 'rxjs';
+import {map, Observable, of, take} from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import {Router} from "@angular/router";
 import {Olympic} from "../../core/models/Olympic";
