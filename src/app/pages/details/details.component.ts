@@ -6,6 +6,7 @@ import {StatsCardComponent} from "../../components/stats-card/stats-card.compone
 import {OlympicService} from "../../core/services/olympic.service";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {LineChartComponent} from "../../components/line-chart/line-chart.component";
+import {ChartData} from "chart.js";
 
 @Component({
   selector: 'app-details',
@@ -24,7 +25,7 @@ export class DetailsComponent implements OnInit{
   pageTitle: string = "Name of the country";
   statsCardInfos: { title: string, value$: Observable<number | null> }[] | null = null;
   countryId: number | null = null;
-  chartData$: Observable<any> = of(null);
+  chartData$: Observable<ChartData<"line"> | null> = of(null);
 
   constructor(private readonly olympicService: OlympicService,
               private readonly route: ActivatedRoute,
@@ -40,7 +41,7 @@ export class DetailsComponent implements OnInit{
     ]
 
     this.chartData$ = this.olympicService.getMedalsByCountryParticipations(this.countryId).pipe(
-      map((data: { year: number, medalsCount: number }[] | null): { labels: string[], datasets: { data: number[] }[] } | null =>
+      map((data: { year: number, medalsCount: number }[] | null): ChartData<"line"> | null =>
         data ? {
           labels: data.map((entry: { year: number, medalsCount: number }): string => entry.year.toString()),
           datasets: [
@@ -52,17 +53,17 @@ export class DetailsComponent implements OnInit{
       )
     );
 
-    this.chartData$.pipe(take(1)).subscribe((olympics: { year: number, medalsCount: number }[] | null): void => {
-      if (!(this.statsCardInfos && olympics)) {
+    this.chartData$.pipe(take(1)).subscribe((chartData: ChartData<"line"> | null): void => {
+      if (!this.statsCardInfos || !chartData) {
         setTimeout((): void => this.checkDataAndRedirect(), 1000);
       }
     });
   }
 
   private checkDataAndRedirect(): void {
-    this.chartData$.pipe(take(1)).subscribe((updatedOlympics: { year: number, medalsCount: number }[] | null): void => {
-      if (!this.statsCardInfos || !updatedOlympics || updatedOlympics.length === 0) {
-        this.router.navigateByUrl("/404").catch((error: any): void => console.error(error.message));
+    this.chartData$.pipe(take(1)).subscribe((chartData: ChartData<"line"> | null): void => {
+      if (!this.statsCardInfos || !chartData) {
+        this.router.navigateByUrl("/404").catch((error: Error): void => console.error(error.message));
       }
     });
   }

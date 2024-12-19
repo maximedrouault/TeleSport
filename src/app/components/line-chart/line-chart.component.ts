@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ChartModule} from "primeng/chart";
-import {ChartData} from "chart.js";
-import {Observable, of} from "rxjs";
+import {ChartData, ChartOptions} from "chart.js";
 
 @Component({
   selector: 'app-line-chart',
@@ -13,15 +12,12 @@ import {Observable, of} from "rxjs";
   styleUrl: './line-chart.component.scss'
 })
 export class LineChartComponent implements OnInit {
-  @Input() chartData$: Observable<ChartData> = of();
+  @Input() chartData: ChartData<"line"> | null = null;
   chartType: "bar" | "line" | "scatter" | "bubble" | "pie" | "doughnut" | "polarArea" | "radar" | undefined = "line";
-  chartOptions: any;
+  chartOptions: ChartOptions<"line"> | undefined = undefined;
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.chartOptions = {
-      with: "100%",
-      height: "100%",
-
       plugins: {
         legend: {
           display: false

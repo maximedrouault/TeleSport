@@ -1,8 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ChartModule} from "primeng/chart";
-import {Observable, of} from "rxjs";
-import {Chart, ChartData} from "chart.js";
-import Outlabels from '@energiency/chartjs-plugin-piechart-outlabels';
+import {ActiveElement, Chart, ChartData, ChartOptions, TooltipItem} from "chart.js";
+import Outlabels from "@energiency/chartjs-plugin-piechart-outlabels";
 
 Chart.register(Outlabels);
 
@@ -15,17 +14,15 @@ Chart.register(Outlabels);
   templateUrl: './pie-chart.component.html',
   styleUrl: './pie-chart.component.scss'
 })
+
 export class PieChartComponent implements OnInit {
-  @Input() chartData$ : Observable<ChartData> = of();
+  @Input() chartData : ChartData<"pie"> | null = null;
   chartType: "bar" | "line" | "scatter" | "bubble" | "pie" | "doughnut" | "polarArea" | "radar" | undefined = "pie";
-  chartOptions: any;
+  chartOptions: ChartOptions<"pie"> & { plugins: { outlabels: OutlabelsOptions } } | undefined = undefined;
   @Output() segmentClicked: EventEmitter<number> = new EventEmitter<number>();
 
   ngOnInit(): void {
     this.chartOptions = {
-      with: "100%",
-      height: "100%",
-      borderWidth: 0,
       layout: {
         padding: {
           left: 0,
@@ -34,7 +31,6 @@ export class PieChartComponent implements OnInit {
           bottom: 30
         }
       },
-
       plugins: {
         legend: {
           display: false
@@ -53,7 +49,13 @@ export class PieChartComponent implements OnInit {
           bodyAlign: "center",
           displayColors: false,
           yAlign: "bottom",
-          caretSize: 15
+          caretSize: 15,
+          callbacks: {
+            label: function(context: TooltipItem<"pie">): string {
+              const value: number = context.parsed;
+              return `🏅 ${value}`;
+            }
+          }
         },
         outlabels: {
           color: "black",
@@ -70,10 +72,9 @@ export class PieChartComponent implements OnInit {
     };
   }
 
-  onChartClick(event: any): void {
+  onChartClick(event: { element: ActiveElement }): void {
     if (event.element) {
       const clickedSegment: number = event.element.index;
-
       this.segmentClicked.emit(clickedSegment);
     }
   }

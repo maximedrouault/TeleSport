@@ -8,5 +8,5 @@ import {Component, Input} from '@angular/core';
   styleUrl: './title.component.scss'
 })
 export class TitleComponent {
-  @Input() pageTitle?: string;
+  @Input() pageTitle: string = "";
 }

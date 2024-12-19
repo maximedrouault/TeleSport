@@ -69,7 +69,7 @@ export class OlympicService {
    * Gets the total number of medals won by each country.
    * @returns {Observable<{ country: string, totalMedals: number }[]>} An observable containing the total medals by country.
    */
-  getTotalMedalsByCountries(): Observable<{ country: string, totalMedals: number }[]> {
+  getTotalMedalsByCountries(): Observable<{ country: string, totalMedals: number }[] | null> {
     return this.getOlympics().pipe(
       map((olympics: Olympic[]): { country: string, totalMedals: number }[] => {
         return olympics.map((country: Olympic): { country: string, totalMedals: number } => ({

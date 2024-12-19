@@ -8,5 +8,5 @@ import {Component, Input} from '@angular/core';
   styleUrl: './stats-card.component.scss'
 })
 export class StatsCardComponent {
-  @Input() statsCardInfos?: { title: string, value: number | null };
+  @Input() statsCardInfos: { title: string, value: number | null } | null = null;
 }

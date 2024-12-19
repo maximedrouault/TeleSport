@@ -13,10 +13,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.olympicService.loadInitialData().pipe(take(1)).subscribe({
-      error: (error: any): any => {
+      error: (error: Error): void => {
         console.error("An error occurred during data retrieving", error.message);
         this.router.navigateByUrl("/404")
-          .catch((error: any): void => console.error("Failed to navigate to 404: ", error.message));
+          .catch((error: Error): void => console.error("Failed to navigate to 404: ", error.message));
       }
     });
   }

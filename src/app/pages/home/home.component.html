@@ -6,13 +6,13 @@
       <app-stats-card [statsCardInfos]="{
       title: statCardInfo.title,
       value: (statCardInfo.value$ | async)
-    }" />
+      }" />
     }
   </div>
 
   <div class="pie-chart-container">
     <app-pie-chart
-      [chartData$]="chartData$ | async"
+      [chartData]="chartData$ | async"
       (segmentClicked)="handleSegmentClicked($event)"
     />
   </div>

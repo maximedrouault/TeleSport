@@ -1,9 +1,9 @@
-@if (chartType && chartData$ && chartOptions) {
+@if (chartType && chartData && chartOptions) {
   <p-chart [type]="chartType"
-           [data]="chartData$"
+           [data]="chartData"
            [options]="chartOptions"
-           [height]="chartOptions.height"
-           [width]="chartOptions.width"
+           height="100%"
+           width="100%"
   />
 } @else {
   <p class="line-chart-placeholder">No data or options available to display the chart.</p>

@@ -6,12 +6,12 @@
       <app-stats-card [statsCardInfos]="{
       title: statCardInfo.title,
       value: (statCardInfo.value$ | async)
-    }" />
+      }" />
     }
   </div>
 
   <div class="line-chart-container">
-    <app-line-chart [chartData$]="chartData$ | async" />
+    <app-line-chart [chartData]="chartData$ | async" />
   </div>
 
   <a routerLink="" class="back-link">Go back</a>
